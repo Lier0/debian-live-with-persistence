@@ -1,6 +1,6 @@
 ## Howo to create a debian-live drive with persistence
 
-You can get an iso-hybrid of deibna [here](https://www.debian.org/CD/live/)
+You can get an iso-hybrid of debian [here](https://www.debian.org/CD/live/)
 Once you get the iso, there are 2 steps :
 * formating the drive
 * copying to the drive
