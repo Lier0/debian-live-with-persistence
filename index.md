@@ -1,11 +1,11 @@
-## Howo to create a debian-live drive with persistence
+## Get the iso
 
 You can get an iso-hybrid of debian [here](https://www.debian.org/CD/live/)
 Once you get the iso, there are 2 steps :
 * formating the drive
 * copying to the drive
 
-### Formating the drive
+## Formating the drive
 
 You need :
 * a first partition in FAT with boot flag,
@@ -14,7 +14,7 @@ You need :
 ### Copying to the drive
 Lets copy to the FAT and the ext partition.
 
-#### FAT
+### FAT
 
 You have to mount the FAT partition, lets admit to `/mnt`. Then unarchive the iso to /mnt.
 
@@ -35,7 +35,7 @@ We need some changes on the files.
 # umount /dev/sdd1
 ```
 
-#### Ext4
+### Ext4
 
 ```
 # mount /dev/sdd2 /mnt
@@ -45,4 +45,4 @@ We need some changes on the files.
 # umount /dev/sdd2
 ```
 
-### Now time to boot it !
+## Now time to boot it !
