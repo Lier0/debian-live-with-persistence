@@ -1,37 +1,48 @@
-## Welcome to GitHub Pages
+## Howo to create a live-debian drive with persistence
 
-You can use the [editor on GitHub](https://github.com/Lier0/debian-live-with-persistence/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+You can get an iso-hybrid of deibna [here](https://www.debian.org/CD/live/)
+Once you get the iso, there are 2 steps :
+* formating the drive
+* copying to the drive
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Formating the drive
 
-### Markdown
+You need :
+* a first partition in FAT with boot flag,
+* and an other ext4 partition with label persistence. The label "persistence" is mandatory.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Copying to the drive
+Lets copy to the FAT and the ext partition.
 
-```markdown
-Syntax highlighted code block
+#### FAT
 
-# Header 1
-## Header 2
-### Header 3
+You have to mount the FAT partition, lets admit to `/mnt`. Then unarchive the iso to /mnt.
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+# mount /dev/sdd1 /mnt
+# cd /mnt
+# 7z x ~/iso/live-debian.iso
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+We need some changes on the files.
+```
+# mv isolinux syslinux
+# for f in $( grep -FRil "splash quiet" ); do echo $f; LANG=C sed 's/splash quiet/persistence /;s/quiet splash/persistence /' -i $f; done;
+# cd syslinux
+# rename "s/iso/sys/" iso*
+# cd ~
+# sync
+# umount /dev/sdd1
+```
 
-### Jekyll Themes
+#### Ext4
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Lier0/debian-live-with-persistence/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```
+# mount /dev/sdd2 /mnt
+# cd /mnt
+# echo "/ union" > persistence.conf 
+# sync
+# umount /dev/sdd2
+```
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Now time to boot it !
