@@ -11,7 +11,8 @@ You need :
 * a first partition in FAT with boot flag,
 * and an other ext4 partition with label persistence. The label "persistence" is mandatory.
 
-### Copying to the drive
+## Copying to the drive
+
 Lets copy to the FAT and the ext partition.
 
 ### FAT
