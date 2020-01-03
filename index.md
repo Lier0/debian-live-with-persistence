@@ -1,4 +1,4 @@
-## Howo to create a live-debian drive with persistence
+## Howo to create a debian-live drive with persistence
 
 You can get an iso-hybrid of deibna [here](https://www.debian.org/CD/live/)
 Once you get the iso, there are 2 steps :
@@ -21,7 +21,7 @@ You have to mount the FAT partition, lets admit to `/mnt`. Then unarchive the is
 ```
 # mount /dev/sdd1 /mnt
 # cd /mnt
-# 7z x ~/iso/live-debian.iso
+# 7z x ~/iso/debian-live.iso
 ```
 
 We need some changes on the files.
